@@ -1,0 +1,97 @@
+extends layout
+
+block content
+  style.
+
+    @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@300;400&display=swap');
+      h1 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+        text-align: center;
+        padding-top: 2rem;
+      }
+       h2 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+        text-align: center;
+        padding-top: 2rem;
+        font-size: 2rem;
+      }
+       h3 {
+        font-family: 'Poppins', serif;
+        color: #000000;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom:5px;
+      }
+      h4 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+      }
+      p {
+        font-family: 'Poppins', serif;
+        color: #000000;
+      }
+      p.paragraph {
+        margin-left: 1rem;
+      }
+      p.paragraph2 {
+        margin-left: 1rem;
+        font-weight: bold;
+      }
+    body {
+      background-color: #f2f2f2; /* Cor de fundo */
+      color: #333; /* Cor do texto */
+      font-family: 'Arial', sans-serif; /* Fonte do texto */
+    }
+    ul.sumario {
+      background-color: #ffff; /* Cor de fundo */
+      border-radius:20px;
+      box-shadow: 3px 3px 4px grey;
+      width:20%;
+      align-self: center;
+      margin: 0 auto;
+    }
+    .bold {
+      font-weight: bold;
+    }
+
+
+  h1 Titulo: #{book.title}
+
+  p #[strong Author:]
+    a(href=book.author.url) #{book.author.name}
+  p #[strong Summary:] #{book.summary}
+  p #[strong ISBN:] #{book.isbn}
+  p #[strong Genre:]
+    each val, index in book.genre
+      a(href=val.url) #{val.name}
+      if index < book.genre.length - 1
+        |,
+
+  div(style='margin-left:20px;margin-top:20px')
+    h4 Copies
+
+    each val in book_instances
+      hr
+      if val.status=='Available'
+        p.text-success.bold #{val.status}
+      else if val.status=='Maintenance'
+        p.text-danger.bold #{val.status}
+      else
+        p.text-warning.bold #{val.status}
+      p #[strong Imprint:] #{val.imprint}
+      if val.status!='Available'
+        p #[strong Data de devolução:] #{val.due_back}
+      p #[strong Id:]
+        a(href=val.url) #{val._id}
+
+    else
+      p Não á copias na biblioteca.
+
+  hr
+  p
+    a(href=book.url+'/delete') Delete Book
+  p
+    a(href=book.url+'/update') Update Book

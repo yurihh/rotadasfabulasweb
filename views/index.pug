@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  style.
+    @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@300;400&display=swap');
+      h1 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+        text-align: center;
+        padding-top: 2rem;
+      }
+       h2 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+        text-align: center;
+        padding-top: 2rem;
+        font-size: 2rem;
+        text-decoration:underline;
+      }
+       h3 {
+        font-family: 'Poppins', serif;
+        color: #000000;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom:5px;
+      }
+      p {
+        text-align: center;
+      }
+      body {
+        background-color: #f2f2f2; /* Cor de fundo */
+        color: #333; /* Cor do texto */
+        font-family: 'Arial', sans-serif; /* Fonte do texto */
+      }
+      ul.sumario {
+        background-color: #ffff; /* Cor de fundo */
+        border-radius: 20px;
+        box-shadow: 3px 3px 4px grey;
+        width: 20%;
+        align-self: center;
+        margin: 0 auto;
+      }
+      li {
+        padding: 5px;
+      }
+  
+  h1=title
+  p Bem-vindo a #[em Rota das Fábulas], um website de biblioteca desenvolvido em Express!!
+  h2 Sumário:
+
+  h3 Acervo da biblioteca!
+
+  ul(class='sumario')
+    li #[strong Livros:] !{book_count}
+    li #[strong Cópias:] !{book_instance_count}
+    li #[strong Cópias disponíveis:] !{book_instance_available_count}
+    li #[strong Autores:] !{author_count}
+    li #[strong Gêneros:] !{genre_count}

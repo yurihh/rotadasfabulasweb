@@ -1,0 +1,80 @@
+extends layout
+
+block content
+  style.
+    @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@300;400&display=swap');
+    h1 {
+      font-family: 'Gochi Hand', cursive;
+      color: #075d37;
+      text-align: center;
+      padding-top: 2rem;
+    }
+    .container {
+      text-align: center;
+      font-family: 'Poppins', serif;
+    }
+    p {
+      font-family: 'Poppins', serif;
+      color: #075d37;
+      text-align: center;
+    }
+
+    .btn.btn-primary {
+      text-decoration: none;
+      background-color: #A5C1A6;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Poppins', serif;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .btn.btn-primary:hover {
+      background-color: #075d37;
+      color: white;
+    }
+    .form-control {
+      border-radius: 10px;
+      font-family: 'Poppins', serif;
+      width: 20%;
+      margin-right: 500px;
+    }
+    .btn {
+      display: flex;
+    }
+    li {
+          padding:5px;
+        }
+    .checkbox-input {
+      margin: 0 auto;
+      text-align: center;
+    }
+    .form-group {
+      margin-left: 45%;
+    }
+
+  h1 Excluir gênero: #{genre.name}
+
+  if genre_books.length
+
+    p #[strong Exclua os livros a seguir antes de tentar excluir esse gênero.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Livros
+
+      dl
+      each book in genre_books
+        dt
+          a(href=book.url) #{book.title}
+        dd #{book.summary}
+
+  else
+    p Você realmente quer deletar esse gênero?
+
+    form(method='POST' action='')
+      div.form-group
+        input#id.form-control(type='hidden',name='id', required='true', value=genre._id )
+
+      button.btn.btn-primary(type='submit') Excluir

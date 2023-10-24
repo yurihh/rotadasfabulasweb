@@ -1,0 +1,47 @@
+extends layout
+
+block content
+
+  h1 #{title}: #{book.title}
+
+  p #[strong Autor:]
+    a(href=book.author.url) #{book.author.name}
+  p #[strong Sinopse:] #{book.summary}
+  p #[strong ISBN:] #{book.isbn}
+  p #[strong Gênero:]
+    each val in book.genre
+      a(href=val.url) #{val.name}
+      |,
+
+  hr
+
+  if book_instances.length
+
+    p #[strong Exclua os livros a seguir antes de tentar excluir esse gênero.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Copias
+
+      each book_copy in book_instances
+        hr
+        if book_copy.status=='Available'
+          p.text-success #{book_copy.status}
+        else if book_copy.status=='Maintenance'
+          p.text-danger #{book_copy.status}
+        else
+          p.text-warning #{book_copy.status}
+        p #[strong Chancela:] #{book_copy.imprint}
+        if book_copy.status!='Available'
+          p #[strong Data de devolução:] #{book_copy.due_back}
+        p #[strong Id:]
+          a(href=book_copy.url) #{book_copy._id}
+
+  else
+    p Você realmente quer excluir esse livro?
+
+    form(method='POST' action='')
+      div.form-group
+        input#id.form-control(type='hidden',name='id', required='true', value=book._id )
+
+      button.btn.btn-primary(type='submit') Excluir

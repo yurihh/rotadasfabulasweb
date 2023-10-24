@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  style.
+    @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@300;400&display=swap');
+    h1 {
+      font-family: 'Gochi Hand', cursive;
+      color: #075d37;
+      text-align: center;
+      padding-top: 2rem;
+    }
+    .container {
+      text-align: center;
+      font-family: 'Poppins', serif;
+    }
+    label {
+      font-family: 'Poppins', serif;
+      color: #075d37;
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .btn.btn-primary {
+      text-decoration: none;
+      background-color: #A5C1A6;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Poppins', serif;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .btn.btn-primary:hover {
+      background-color: #075d37;
+      color: white;
+    }
+    .form-control {
+      border-radius: 10px;
+      font-family: 'Poppins', serif;
+      width: 20%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .btn {
+      display: flex;
+    }
+    li {
+          padding:5px;
+        }
+
+  h1=title
+
+  form(method='POST' action='')
+    .form-group
+      label(for='first_name') Primeiro nome:
+      input#first_name.form-control(type='text', placeholder='Primeiro nome' name='first_name' required='true' value=(undefined===author ? '' : author.first_name))
+    .form-group
+      label(for='family_name') Sobrenome:
+      input#family_name.form-control(type='text', placeholder='Sobrenome' name='family_name' required='true' value=(undefined===author ? '' : author.family_name))
+    .form-group
+      label(for='date_of_birth') Data de nascimento:
+      input#date_of_birth.form-control(type='date', name='date_of_birth' value=(undefined===author ? '' : author.date_of_birth_yyyy_mm_dd))
+    .form-group
+      label(for='date_of_death') Data de morte:
+      input#date_of_death.form-control(type='date', name='date_of_death' value=(undefined===author ? '' : author.date_of_death_yyyy_mm_dd))
+    .form-group
+      button.btn.btn-primary(type='submit') Enviar
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

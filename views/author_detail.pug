@@ -1,0 +1,80 @@
+extends layout
+
+block content
+  style.
+
+    @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@300;400&display=swap');
+      h1 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+        text-align: center;
+        padding-top: 2rem;
+      }
+       h2 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+        text-align: center;
+        padding-top: 2rem;
+        font-size: 2rem;
+      }
+       h3 {
+        font-family: 'Poppins', serif;
+        color: #000000;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom:5px;
+      }
+      h4 {
+        font-family: 'Gochi Hand', cursive;
+        color: #075d37;
+      }
+      p {
+        font-family: 'Poppins', serif;
+        color: #000000;
+      }
+      p.paragraph {
+        margin-left: 1rem;
+      }
+      .data {
+        margin-left: 1rem;
+      }
+    body {
+      background-color: #f2f2f2; /* Cor de fundo */
+      color: #333; /* Cor do texto */
+      font-family: 'Arial', sans-serif; /* Fonte do texto */
+    }
+    ul.sumario {
+      background-color: #ffff; /* Cor de fundo */
+      border-radius:20px;
+      box-shadow: 3px 3px 4px grey;
+      width:20%;
+      align-self: center;
+      margin: 0 auto;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    
+
+  h1 Author: #{author.name}
+  p(class='data') #{author.lifespan}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Livros
+
+    dl
+    each book in author_books
+      dt
+        a(href=book.url) #{book.title}
+      dd #{book.summary}
+
+    else
+      p Esse autor não possui livros.
+
+  hr
+  p
+    a(href=author.url+'/delete') Excluir autor
+  p
+    a(href=author.url+'/update') Atualizar autor
